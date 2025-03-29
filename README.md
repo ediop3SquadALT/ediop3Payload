@@ -17,4 +17,4 @@ cd ediop3Payload
 
 for help
 
-sudo bash ediop3Payload.sh --help
+sudo ruby ediop3Payload.rb --help
