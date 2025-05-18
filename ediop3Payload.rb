@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 # -*- coding: binary -*-
 
-# Logo Display
 def display_logo
   logo = <<~EOF
     ███████╗██████╗░██╗░█████╗░██████╗░██████╗░
@@ -23,16 +22,13 @@ def display_logo
   puts logo
 end
 
-# Error Classes
 class Ediop3PayloadError < StandardError; end
 class HelpError < StandardError; end
 class UsageError < Ediop3PayloadError; end
 
-# Required Libraries
 require 'optparse'
 require 'fileutils'
 
-# Payload Generator Class
 class PayloadGenerator
   def initialize(options = {})
     @options = options
@@ -67,7 +63,6 @@ class PayloadGenerator
     end
   end
 
-  # Reverse TCP Payloads
   def generate_reverse_tcp_payload
     case @options[:platform]
     when 'windows'
@@ -122,7 +117,6 @@ class PayloadGenerator
   end
 end
 
-# Command Line Argument Parsing
 def parse_args(args)
   opts = {}
   opt = OptionParser.new
@@ -154,11 +148,10 @@ def parse_args(args)
     opts[:lport] = lport
   end
 
-  # Fixing the --help option handling
   opt.on_tail("-h", "--help", "Show this message") do
     display_logo
-    puts opt  # Print the help message instead of raising an error
-    exit 0    # Exit normally
+    puts opt  
+    exit 0
   end
 
   begin
@@ -171,7 +164,6 @@ def parse_args(args)
   opts
 end
 
-# Main Execution
 begin
   if ARGV.empty?
     display_logo
